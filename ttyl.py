@@ -152,3 +152,26 @@ def game_loop(level=2):
 
 # Start the game with level 2
 game_loop(level=2)
+
+# Define Obstacle class (with movement and image)
+class Obstacle:
+    def __init__(self, x, y, speed, direction='horizontal'):
+        self.x = x
+        self.y = y
+        self.speed = speed
+        self.direction = direction
+        self.width = 50
+        self.height = 50
+
+    def move(self):
+        if self.direction == 'horizontal':
+            self.x += self.speed
+            if self.x < 50 or self.x + self.width > WIDTH - 50:
+                self.speed = -self.speed
+        else:
+            self.y += self.speed
+            if self.y < 50 or self.y + self.height > HEIGHT - 50:
+                self.speed = -self.speed
+
+    def draw(self):
+        screen.blit(obstacle_img, (self.x, self.y))
